@@ -67,17 +67,53 @@ curl http://localhost:8080/api/health
 
 ## Running the API
 
-### 1. Install Dependencies
+### 1. Setup Database
+Make sure you have PostgreSQL running and the database created:
+```sql
+CREATE DATABASE csv2json;
+
+CREATE TABLE csv_data (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    file_hash VARCHAR(32) UNIQUE NOT NULL,
+    json_data JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### 2. Set Environment Variables
+Copy `.env.example` to `.env` and configure:
+```bash
+cp .env.example .env
+```
+
+### 3. Install Dependencies
 ```bash
 go mod tidy
 ```
 
-### 2. Run the Server
+### 4. Run the Server
 ```bash
 go run cmd/api/main.go
 ```
 
 The server will start on port 8080 (or the port specified in your environment).
+
+## Logs
+
+The API provides comprehensive logging for all operations:
+
+```
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:22: Starting CSV2JSON API server...
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:32: Connecting to database at localhost:5432...
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:43: Database connection established
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:54: Server starting on port 8080
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:55: Available endpoints:
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:56:   POST /api/upload - Upload CSV file
+[CSV2JSON-API] 2026/01/27 14:30:15 main.go:57:   GET  /api/health - Health check
+[CSV2JSON-API] 2026/01/27 14:30:20 csv_handler.go:30: Received CSV upload request
+[CSV2JSON-API] 2026/01/27 14:30:20 csv_handler.go:48: Processing file: data.csv (size: 1024 bytes)
+[CSV2JSON-API] 2026/01/27 14:30:20 csv_handler.go:58: Successfully processed CSV file: data.csv
+```
 
 ## Testing the API
 
