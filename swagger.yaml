@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: CSV to JSON API
+  description: |
+    API for uploading CSV files, converting them to JSON, and retrieving stored data.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /upload:
+    post:
+      summary: Upload CSV file
+      description: Upload a CSV file and receive converted JSON output.
+      tags:
+        - CSV
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to upload
+      responses:
+        "200":
+          description: CSV successfully converted to JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Invalid request or missing file
+        "405":
+          description: Method not allowed
+        "500":
+          description: Failed to process CSV file
+
+  /health:
+    get:
+      summary: Health check
+      description: Check if the service is running and healthy.
+      tags:
+        - Health
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+
+  /data:
+    get:
+      summary: Get all stored CSV data
+      description: Retrieve all CSV-to-JSON converted data from the database.
+      tags:
+        - Data
+      responses:
+        "200":
+          description: List of stored records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        "405":
+          description: Method not allowed
+        "500":
+          description: Failed to retrieve data
+
+  /data/by-id:
+    get:
+      summary: Get data by ID
+      description: Retrieve a specific CSV data record by its ID.
+      tags:
+        - Data
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of the record to retrieve
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: Record found
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Missing or invalid ID parameter
+        "404":
+          description: Record not found
+        "405":
+          description: Method not allowed
