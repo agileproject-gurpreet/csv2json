@@ -1,6 +1,8 @@
 # csv2json
 Fast, simple, and extensible CSV to JSON converter for developers with PostgreSQL integration.
 
+This is the public repository containing installation steps, usage examples, and documentation
+
 ## Features
 
 - Upload CSV files via REST API
@@ -11,7 +13,7 @@ Fast, simple, and extensible CSV to JSON converter for developers with PostgreSQ
 
 ## Prerequisites
 
-- Go 1.25.4 or higher
+- Go 1.24 or higher
 - PostgreSQL 12 or higher
 
 ## Database Setup
