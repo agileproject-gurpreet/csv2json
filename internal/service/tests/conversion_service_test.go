@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lavishag4193/csv2jsonx/internal/service"
+	"github.com/agileproject-gurpreet/csv2json/internal/service"
 )
 
 // TestNewConversionService tests service creation

@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/lavishag4193/csv2jsonx/internal/parser"
+	"github.com/agileproject-gurpreet/csv2json/internal/parser"
 )
 
 func ConvertReader(r io.Reader) ([]byte, error) {

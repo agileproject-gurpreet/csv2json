@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/lavishag4193/csv2jsonx/pkg/csv2jsonx"
+	"github.com/agileproject-gurpreet/csv2json/pkg/csv2jsonx"
 )
 
 func main() {

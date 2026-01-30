@@ -11,8 +11,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/lavishag4193/csv2jsonx/internal/handler"
-	"github.com/lavishag4193/csv2jsonx/internal/service"
+	"github.com/agileproject-gurpreet/csv2json/internal/handler"
+	"github.com/agileproject-gurpreet/csv2json/internal/service"
 )
 
 // TestUploadCSV_Success tests successful CSV file upload

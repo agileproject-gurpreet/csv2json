@@ -1,4 +1,4 @@
-module github.com/lavishag4193/csv2jsonx
+module github.com/agileproject-gurpreet/csv2json
 
 go 1.21
 

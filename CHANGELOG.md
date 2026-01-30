@@ -64,5 +64,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment-based configuration
 - Configurable SSL mode for database connections
 
-[unreleased]: https://github.com/lavishag4193/csv2jsonx/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/lavishag4193/csv2jsonx/releases/tag/v1.0.0
+[unreleased]: https://github.com/agileproject-gurpreet/csv2json/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/agileproject-gurpreet/csv2json/releases/tag/v1.0.0

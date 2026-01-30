@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/lavishag4193/csv2jsonx/internal/service"
+	"github.com/agileproject-gurpreet/csv2json/internal/service"
 )
 
 type CSVHandler struct {

@@ -6,8 +6,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/lavishag4193/csv2jsonx/internal/database"
-	"github.com/lavishag4193/csv2jsonx/internal/parser"
+	"github.com/agileproject-gurpreet/csv2json/internal/database"
+	"github.com/agileproject-gurpreet/csv2json/internal/parser"
 )
 
 type ConversionService struct {

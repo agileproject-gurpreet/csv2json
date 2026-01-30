@@ -46,7 +46,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 2. **Add upstream remote:**
    ```bash
-   git remote add upstream https://github.com/lavishag4193/csv2jsonx.git
+   git remote add upstream https://github.com/agileproject-gurpreet/csv2json.git
    ```
 
 3. **Install dependencies:**
