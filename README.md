@@ -3,6 +3,10 @@ Fast, simple, and extensible CSV to JSON converter for developers with PostgreSQ
 
 This is the public repository containing installation steps, usage examples, and documentation
 
+## Video Demo
+
+📹 [Watch the project demo](docs/Video%20Project%201.mp4)
+
 ## Features
 
 - Upload CSV files via REST API
@@ -10,6 +14,10 @@ This is the public repository containing installation steps, usage examples, and
 - PostgreSQL database storage for all converted data
 - JSONB support for efficient querying
 - Connection pooling and optimized database operations
+- Standalone Go package for programmatic use
+
+For reference
+
 
 ## Prerequisites
 
@@ -30,10 +38,18 @@ The application will automatically create the required tables on startup.
 
 ## Installation
 
+### As a Go Package
+
+```bash
+go get github.com/agileproject-gurpreet/csv2json
+```
+
+### For Local Development
+
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd csv2json-api
+git clone https://github.com/agileproject-gurpreet/csv2json.git
+cd csv2json
 ```
 
 2. Install dependencies:
@@ -50,6 +66,39 @@ cp .env.example .env
 4. Run the application:
 ```bash
 go run cmd/api/main.go
+```
+
+## Usage as Go Package
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/agileproject-gurpreet/csv2json/pkg/csv2jsonx"
+)
+
+func main() {
+	// Convert a CSV file to JSON
+	jsonData, err := csv2jsonx.ConvertFile("sample.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(jsonData))
+
+	// Or convert from an io.Reader
+	// jsonData, err := csv2jsonx.ConvertReader(reader)
+}
+```
+
+### For Local Development with Replace Directive
+
+If you're developing locally and want to use the local version of the module, add this to your `go.mod`:
+
+```go
+replace github.com/agileproject-gurpreet/csv2json => ../path/to/csv2json
 ```
 
 ## Environment Variables
