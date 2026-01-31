@@ -1,4 +1,20 @@
-# Architecture Overview
+
+# Architecture Document: csv2json
+
+## Overview
+
+The `csv2json` project is a Go-based tool designed to convert CSV files into JSON format via a RESTful API. It is structured for extensibility, maintainability, and ease of integration with databases (e.g., PostgreSQL).
+
+## High-Level Architecture
+
+- **API Layer** (`cmd/api/main.go`): Handles HTTP requests, routing, and response formatting.
+- **Handler Layer** (`internal/handler/`): Contains logic for processing API requests, invoking services, and error handling.
+- **Service Layer** (`internal/service/`): Implements business logic, orchestrates parsing and conversion, and interacts with the database layer.
+- **Parser Layer** (`internal/parser/`): Responsible for parsing CSV files and transforming them into Go data structures.
+- **Database Layer** (`internal/database/`): Manages database connections and operations (e.g., PostgreSQL integration).
+- **Package Layer** (`pkg/csv2jsonx/`): Provides reusable conversion utilities for CSV to JSON transformation.
+
+---
 
 ## System Architecture
 
@@ -133,9 +149,18 @@ Client                   Handler                Service              Database
   │◄────────────────────────│                      │                    │
 ```
 
+
 ## Component Responsibilities
 
-### 1. HTTP Handlers (`internal/handler/`)
+
+### 1. API Layer (`cmd/api/main.go`)
+- **Responsibility**: Entry point for HTTP requests, sets up routing and server configuration.
+- **Functions**:
+  - Define RESTful endpoints
+  - Start and manage the HTTP server
+  - Integrate middleware (logging, CORS, etc.)
+
+### 2. Handler Layer (`internal/handler/`)
 - **Responsibility**: Handle HTTP requests and responses
 - **Functions**:
   - Parse multipart form data
@@ -144,28 +169,59 @@ Client                   Handler                Service              Database
   - Format HTTP responses
   - Log requests
 
-### 2. Conversion Service (`internal/service/`)
-- **Responsibility**: Business logic
+### 3. Service Layer (`internal/service/`)
+- **Responsibility**: Business logic and orchestration
 - **Functions**:
   - Coordinate CSV parsing
   - Manage database operations
   - Handle errors
   - Return formatted data
 
-### 3. CSV Parser (`internal/parser/`)
+### 4. Parser Layer (`internal/parser/`)
 - **Responsibility**: CSV parsing
 - **Functions**:
   - Read CSV headers
   - Parse rows into maps
   - Handle CSV format variations
 
-### 4. Database Layer (`internal/database/`)
+### 5. Database Layer (`internal/database/`)
 - **Responsibility**: PostgreSQL operations
 - **Functions**:
   - Connection management
   - Schema initialization
   - CRUD operations
   - Query execution
+
+### 6. Package Layer (`pkg/csv2jsonx/`)
+- **Responsibility**: Reusable CSV to JSON conversion utilities
+- **Functions**:
+  - Convert parsed CSV data to JSON
+  - Provide utility functions for data transformation
+
+---
+
+
+## Data Flow
+
+1. **API Request**: User sends a CSV file via HTTP POST.
+2. **Handler**: Validates and forwards the request to the service.
+3. **Service**: Orchestrates parsing, conversion, and (optionally) database storage.
+4. **Parser**: Reads and parses the CSV file.
+5. **Converter**: Transforms parsed data into JSON.
+6. **Database**: (Optional) Stores or retrieves conversion results.
+7. **Response**: JSON result is returned to the user.
+
+---
+
+## Extensibility
+- New parsers or converters can be added in `pkg/csv2jsonx/`.
+- Additional database backends can be implemented in `internal/database/`.
+- API endpoints can be extended in `cmd/api/main.go` and `internal/handler/`.
+
+## Testing
+- Unit tests are located in `internal/handler/tests/`, `internal/parser/tests/`, and `internal/service/tests/`.
+
+---
 
 ## Data Transformations
 
